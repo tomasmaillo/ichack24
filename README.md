@@ -1,30 +1,13 @@
-# React + TypeScript + Vite
+# ARK-ademic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Inspiration
 
-Currently, two official plugins are available:
+We found our inspiration in the common issue of low student engagement in classrooms. Our aim was to inject fun into classroom learning without overburdening teachers. The CodeWords workshop was a turning point for us, offering easy integration and a broad API range. Targeting the EdTech prize, we envisioned our tool enhancing daily classroom learning, meriting the daily use prize for its simplicity and potential for frequent application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What it does
 
-## Expanding the ESLint configuration
+**ARK-ademic** enhances the learning experience by recording the teacher's presentation, transcribing their speech, and utilizing a Large Language Model (LLM) to generate multiple-choice questions from the lesson. These questions, upon approval, are sent to students' devices for quick engagement checks. Student responses are anonymized and aggregated as statistics for each question, aiding teachers in planning future lessons with a focus on areas needing improvement.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## How we built it
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The backbone of **ARK-ademic** is provided by CodeWords for the back-end, with the React framework powering our front-end components. We integrated the Whisper API for efficient speech-to-text transcription, ensuring seamless processing of the teacher's speech.
