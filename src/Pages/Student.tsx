@@ -1,5 +1,3 @@
-
-
 const Student = () => {
   return (
     <div>
