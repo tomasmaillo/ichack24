@@ -1,46 +1,61 @@
-import React from 'react';
-import { PieChart, Pie, Cell } from 'recharts';
+import React from 'react'
+import { PieChart, Pie, Cell, Sector } from 'recharts'
 
-const Graph = ({ dynamicData, COLORS, renderCustomizedLabel }) => {
+const Graph = ({ dynamicData }) => {
+  // Define colors and label renderer inside the component for encapsulation
+  const COLORS = ['#D1A0EE', '#1766FF', '#51DE4E', '#FFC267']
+
+  const RADIAN = Math.PI / 180
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    )
+  }
+
   return (
-    <div>
-      <h4>This is a sample question</h4>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '1rem',
+      }}>
+      <PieChart width={200} height={200}>
+        <Pie
+          data={dynamicData}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="count" // Use 'count' from the new data shape
+        >
           {dynamicData.map((entry, index) => (
-            <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-              <div
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  backgroundColor: COLORS[index % COLORS.length],
-                  borderRadius: '5px',
-                  marginRight: '5px',
-                }}
-              ></div>
-              <span>{entry.key}</span>
-            </div>
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
-        </div>
-        <PieChart width={200} height={200}>
-          <Pie
-            data={dynamicData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {dynamicData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-      </div>
+        </Pie>
+      </PieChart>
     </div>
-  );
-};
+  )
+}
 
-export default Graph;
+export default Graph

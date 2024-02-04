@@ -1,100 +1,121 @@
-import React from 'react';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import Graph from '../Components/Graph'; // Adjust the path based on your project structure
+import React, { useEffect } from 'react'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
+import Graph from '../Components/Graph' // Adjust the path based on your project structure
+import QuestionStatistics from '../Components/QuestionStatistics'
+import axios from 'axios'
+
+// const testQuestionsAndAnswers = {
+//   questions: [
+//     {
+//       question: 'What is the name of the teacher?',
+//       choices: {
+//         Vrinda: 0,
+//         Veronica: 2,
+//         Victoria: 1,
+//         Vanessa: 10,
+//       },
+//       answer: 'Vrinda',
+//     },
+//     {
+//       question: 'Where is the teacher originally from?',
+//       choices: {
+//         China: 0,
+//         India: 0,
+//         Japan: 0,
+//         Australia: 0,
+//       },
+//       answer: 'India',
+//     },
+//     {
+//       question: 'How long has the teacher been living in her current location?',
+//       choices: {
+//         '2 years': 0,
+//         '1 year': 0,
+//         '3 years': 0,
+//         '6 months': 0,
+//       },
+//       answer: '1 year',
+//     },
+//     {
+//       question: "What is the teacher's opinion about the weather in London?",
+//       choices: {
+//         'She enjoys it': 0,
+//         'She is used to it': 0,
+//         'She is not sure how she feels about it': 0,
+//         'She dislikes it': 0,
+//       },
+//       answer: 'She is not sure how she feels about it',
+//     },
+//     {
+//       question:
+//         'What city in the UK is rumored to have worse weather than London?',
+//       choices: {
+//         Manchester: 0,
+//         Liverpool: 0,
+//         Birmingham: 0,
+//         Edinburgh: 0,
+//       },
+//       answer: 'Edinburgh',
+//     },
+//   ],
+// }
 
 const Teacher = () => {
-  const rawData = ['London', 3, 'Paris', 2, 'Seattle', 1, 'Munich', 4];
-  const dynamicData = [];
-  for (let i = 0; i < rawData.length; i += 2) {
-    dynamicData.push({ key: rawData[i], value: rawData[i + 1] });
+  const [questionsAndAnswers, setQuestionsAndAnswers] = React.useState([])
+
+  useEffect(() => {
+    // Using axios to make a GET request with custom header
+    axios
+      .post(
+        'https://f3fc-2a0c-5bc0-40-3e3c-70c2-eb9e-ee77-1f6.ngrok-free.app/aggregate_quiz_results/',
+        {
+          headers: {
+            'ngrok-skip-browser-warning': '69420', // Custom header to bypass the ngrok warning
+          },
+        }
+      )
+      .then((response) => {
+        console.log({ response })
+
+        setQuestionsAndAnswers(response.data.questions)
+        return null
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  function transformChoices(originalChoices) {
+    // Convert the originalChoices object into the desired array format
+    const transformed = Object.keys(originalChoices).map((key) => ({
+      answerText: key, // Use the country name as answerText
+      count: originalChoices[key], // Preserve the count value
+    }))
+
+    return transformed
   }
 
-  const questions = [
-    {
-      question: 'What is the capital of France?',
-      choices: ['London', 'Paris', 'Seattle', 'Munich'],
-      answer: 'Paris',
-    },
-
-    // Add more questions as needed
-  ];
-
-  // Calculate overall score
-  const totalQuestions = questions.length;
-  const correctAnswers = dynamicData.filter((entry) => {
-    const question = questions.find((q) => q.question === entry.key);
-    return question && entry.value === question.choices.indexOf(question.answer) + 1;
-  }).length;
-
-  const overallScore = (correctAnswers / totalQuestions) * 100;
-
-  const COLORS = ['#D1A0EE', '#1766FF', '#51DE4E', '#FFC267'];
-  const RECTCOLOR = '#FFA824';
-  const texts = [
-    'I do not understand simultaneous equations',
-    'Could you please explain the example with the polynomial again?',
-    'Could we focus on quadratic equations?',
-  ];
-
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
   return (
-    <div style={{ width: '100vw' }}>
-      <div style={{ maxWidth: '600px', margin: 'auto' }}>
-        <Graph dynamicData={dynamicData} COLORS={COLORS} renderCustomizedLabel={renderCustomizedLabel} />
-        <div style={{ display: 'flex', marginTop: '20px', marginLeft: '50px' }}>
-        <div style={{ flexDirection: 'column', marginRight: '20px' }}>
-          <h3> Questions by students</h3>
-          {[0, 1, 2].map((index) => (
-            <div
-              key={`rectangle-${index}`}
-              style={{
-                width: '190px',
-                height: '60px',
-                backgroundColor: RECTCOLOR,
-                borderRadius: '10px',
-                marginBottom: '10px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'white',
-                fontSize: '13px',
-              }}
-            >
-              {texts[index]}
-            </div>
-          ))}
-        </div>
-        <div>
-          <div>
-            <h3>Overall Score</h3>
-          </div>
-          <CircularProgressbar
-            value={overallScore}
-            text={`${overallScore.toFixed(0)}%`}
-            styles={{
-              root: { width: '100px', marginLeft: '20px' },
-              path: { stroke: 'red' },
-              text: { fill: 'black' },
-            }}
-          />
-        </div>
-      </div>
-      </div>
+    <div
+      style={{
+        maxWidth: '700px',
+        margin: '64px auto',
+        backgroundColor: 'white',
+        padding: '32px',
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+      {questionsAndAnswers.map((question, index) => (
+        <QuestionStatistics
+          key={`question-${index}`}
+          question={question.question}
+          answers={transformChoices(question.choices)}
+          correctAnswer={question.answer}
+        />
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export default Teacher;
+export default Teacher
