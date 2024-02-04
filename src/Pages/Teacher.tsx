@@ -1,7 +1,7 @@
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Graph from '../Components/Graph'; // Adjust the path based on your project structure
 
 const Teacher = () => {
   const rawData = ['London', 3, 'Paris', 2, 'Seattle', 1, 'Munich', 4];
@@ -9,12 +9,33 @@ const Teacher = () => {
   for (let i = 0; i < rawData.length; i += 2) {
     dynamicData.push({ key: rawData[i], value: rawData[i + 1] });
   }
-  console.log(dynamicData);
 
+  const questions = [
+    {
+      question: 'What is the capital of France?',
+      choices: ['London', 'Paris', 'Seattle', 'Munich'],
+      answer: 'Paris',
+    },
+
+    // Add more questions as needed
+  ];
+
+  // Calculate overall score
+  const totalQuestions = questions.length;
+  const correctAnswers = dynamicData.filter((entry) => {
+    const question = questions.find((q) => q.question === entry.key);
+    return question && entry.value === question.choices.indexOf(question.answer) + 1;
+  }).length;
+
+  const overallScore = (correctAnswers / totalQuestions) * 100;
 
   const COLORS = ['#D1A0EE', '#1766FF', '#51DE4E', '#FFC267'];
   const RECTCOLOR = '#FFA824';
-  const texts = ['I do not understand simutaneous equations', 'Could you please explain the example with the polynomial again?', 'Could we focus on quadratic equations?',];
+  const texts = [
+    'I do not understand simultaneous equations',
+    'Could you please explain the example with the polynomial again?',
+    'Could we focus on quadratic equations?',
+  ];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
@@ -29,53 +50,11 @@ const Teacher = () => {
     );
   };
 
-  const percentage = 66;
-
   return (
-    <div>
-      <div style={{ marginTop: '-100px' }}>
-        <ResponsiveContainer width="100%" height={300}>
-          <div style={{ display: 'flex' }}>
-            <h4 style={{ marginLeft: '265px', marginTop: '75px' }}>This is a sample question</h4>
-            <div style={{ flex: 1 }}>
-              <PieChart width={400} height={400}>
-                <Pie
-                  data={dynamicData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {dynamicData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px', marginTop: '105px', }}>
-              {dynamicData.map((entry, index) => (
-                <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                  <div
-                    style={{
-                      width: '30px',
-                      height: '30px',
-                      backgroundColor: COLORS[index % COLORS.length],
-                      borderRadius: '5px',
-                      marginRight: '5px',
-                    }}
-                  ></div>
-                  <span>{entry.key}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </ResponsiveContainer>
-      </div>
-
-      <div style={{ display: 'flex', marginTop: '20px', marginLeft: '50px', }}>
+    <div style={{ width: '100vw' }}>
+      <div style={{ maxWidth: '600px', margin: 'auto' }}>
+        <Graph dynamicData={dynamicData} COLORS={COLORS} renderCustomizedLabel={renderCustomizedLabel} />
+        <div style={{ display: 'flex', marginTop: '20px', marginLeft: '50px' }}>
         <div style={{ flexDirection: 'column', marginRight: '20px' }}>
           <h3> Questions by students</h3>
           {[0, 1, 2].map((index) => (
@@ -103,8 +82,8 @@ const Teacher = () => {
             <h3>Overall Score</h3>
           </div>
           <CircularProgressbar
-            value={percentage}
-            text={`${percentage}%`}
+            value={overallScore}
+            text={`${overallScore.toFixed(0)}%`}
             styles={{
               root: { width: '100px', marginLeft: '20px' },
               path: { stroke: 'red' },
@@ -112,6 +91,7 @@ const Teacher = () => {
             }}
           />
         </div>
+      </div>
       </div>
     </div>
   );
