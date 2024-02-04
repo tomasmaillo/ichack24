@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import SubmitButton from './SubmitButton';
+import styled from 'styled-components'
+import SubmitButton from './SubmitButton'
 
 const FooterContainer = styled.footer`
   position: fixed;
@@ -13,16 +13,18 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   gap: 1rem;
-  
-`;
+`
 
-const Footer = () => {
+const Footer = (props: { onSendQuiz: () => void }) => {
   return (
     <FooterContainer>
-        <SubmitButton buttonText={'Regenerate Questions'} />
-        <SubmitButton buttonText={'Send Quiz'} />
-    </FooterContainer>
-  );
-};
+      <SubmitButton buttonText={'Regenerate Questions'} />
 
-export default Footer;
+      <span onClick={() => props.onSendQuiz()}>
+        <SubmitButton buttonText={'Send Quiz'} />
+      </span>
+    </FooterContainer>
+  )
+}
+
+export default Footer
