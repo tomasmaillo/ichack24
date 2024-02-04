@@ -5,6 +5,7 @@ import './index.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home'
 import Student from './Pages/Student'
+import Teacher from './Pages/Teacher'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/student" element={<Student />} />
+        <Route path="/teacher" element={<Teacher />} />
       </Routes>
     </Router>
   </React.StrictMode>,
