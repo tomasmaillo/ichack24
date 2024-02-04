@@ -36,8 +36,9 @@ const AnswerOption = ({ option, answer }: { option: string, answer:string}) => {
   }, [option]);
 
   return (
-    <CustomAnswer style={{ backgroundColor: color , borderColor: borderColor}}>
-        {answer}
+    <CustomAnswer style={{ marginBottom: "10px", display:"flex", backgroundColor: color , borderColor: borderColor}}>
+        <div style={{marginLeft:'10px'}}>{answer}</div>
+        
     </CustomAnswer>
   );
 };
