@@ -10,9 +10,8 @@ ReactDOM.render(
   <div
     style={{
       width: '100vw',
-      height: 'max(100%, 100dvh)',
+      height: '100%',
       display: 'flex',
-      backgroundColor: '#F4F4F4',
     }}>
     <Router basename={import.meta.env.BASE_URL}>
       <Routes>

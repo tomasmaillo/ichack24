@@ -43,7 +43,7 @@ const Review = () => {
     <div style={CenteredContainer}>
       <div
         style={{
-          maxWidth: '700px',
+          maxWidth: '600px',
           margin: '64px auto',
           backgroundColor: 'white',
           padding: '32px',
@@ -61,8 +61,9 @@ const Review = () => {
           style={{
             margin: '0px',
             color: '#2c2c2c',
-          }}
-        >There are {quiz.length} questions in this quiz.</p>
+          }}>
+          There are {quiz.length} questions in this quiz.
+        </p>
 
         <br />
         <QuizComponent quizData={quiz} />

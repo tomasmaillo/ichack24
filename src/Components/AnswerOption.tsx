@@ -5,7 +5,7 @@ const CustomAnswer = styled.button`
   color: #000000;
   border: solid 3px;
   padding: 14px 0px;
-  width: 500px;
+  width: 100%;
   border-radius: 20px;
   cursor: pointer;
   font-size: 20px;
