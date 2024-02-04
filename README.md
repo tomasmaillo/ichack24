@@ -1,4 +1,5 @@
 # ARK-ademic
+<img width="507" alt="Screenshot 2024-02-04 at 11 47 42" src="https://github.com/tomasmaillo/ichack24/assets/38633386/717cfa6c-37c8-4993-9b05-661a50bae995">
 
 ## Inspiration
 
