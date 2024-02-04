@@ -41,13 +41,37 @@ const Review = () => {
   }, [])
   return (
     <div style={CenteredContainer}>
-      <h1
+      <div
         style={{
-          marginBottom: '20px',
-          fontSize: '50px',
-          color: '#000000',
-        }}></h1>
-      <QuizComponent quizData={quiz} />
+          maxWidth: '700px',
+          margin: '64px auto',
+          backgroundColor: 'white',
+          padding: '32px',
+        }}>
+        <h2
+          style={{
+            marginBottom: '0px',
+            fontSize: '50px',
+            color: '#000000',
+            marginTop: '0px',
+          }}>
+          Review your quiz
+        </h2>
+        <p
+          style={{
+            margin: '0px',
+            color: '#2c2c2c',
+          }}
+        >There are {quiz.length} questions in this quiz.</p>
+
+        <br />
+        <QuizComponent quizData={quiz} />
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
 
       <StickyFooter />
     </div>
