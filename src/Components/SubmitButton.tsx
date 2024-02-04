@@ -2,7 +2,6 @@
 
 // Path: src/Components/SubmitButton.tsx
 // Compare this snippet from src/Components/AnswerOption.tsx:
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Submit = styled.button`
@@ -11,6 +10,7 @@ const Submit = styled.button`
   color: #000000;
   border: #494949 solid 3px;
   padding: 12px 75px;
+  margin: 0 50px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 24px;
@@ -20,10 +20,10 @@ const Submit = styled.button`
     }
 `;
 
-function SubmitButton() {
+const SubmitButton = ({buttonText}: {buttonText: string}) => {
     return (
         <Submit>
-        Send Quiz
+        {buttonText}
         </Submit>
     );
 }

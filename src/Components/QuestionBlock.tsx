@@ -8,10 +8,10 @@ const QuestionBlock = () => {
   return (
     <div>
       <Question/>
-      <div style={{ marginBottom: '10px' }}><AnswerOption option="1" /></div>
-      <div style={{ marginBottom: '10px' }}><AnswerOption option="2"/></div>
-      <div style={{ marginBottom: '10px' }}><AnswerOption option="3"/></div>
-      <div><AnswerOption option="4"/></div>
+      <div style={{ marginBottom: '12px' }}><AnswerOption option="1" answer={'I dont know'}/></div>
+      <div style={{ marginBottom: '12px' }}><AnswerOption option="2" answer={'Ask your Mum'}/></div>
+      <div style={{ marginBottom: '12px' }}><AnswerOption option="3" answer={'Leave me alone'}/></div>
+      <div style={{ marginBottom: '30px' }}><AnswerOption option="4" answer={'AAAAaaaaaaAAAAAAA'}/></div>
     </div>
   )
 }

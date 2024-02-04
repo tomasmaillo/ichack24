@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const CustomAnswer = styled.button`
-  align-items: center;
-  margin: 0 auto;
-  background-color: #1766ff;
   color: #000000;
-  border: #1766ff solid 3px;
-  padding: 14px 200px;
+  border: solid 3px;
+  padding: 14px 0px;
+  width: 500px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 20px;
@@ -17,7 +15,7 @@ const CustomAnswer = styled.button`
     }
 `;
 
-const AnswerOption = ({ option }: { option: string }) => {
+const AnswerOption = ({ option, answer }: { option: string, answer:string}) => {
   const [color, setColor] = useState("");
   const [borderColor, setBorderColor] = useState("");
 
@@ -37,10 +35,9 @@ const AnswerOption = ({ option }: { option: string }) => {
       }
   }, [option]);
 
-
   return (
     <CustomAnswer style={{ backgroundColor: color , borderColor: borderColor}}>
-        I don't know man
+        {answer}
     </CustomAnswer>
   );
 };

@@ -8,14 +8,15 @@ const FooterContainer = styled.footer`
   width: 100%;
   background-color: #e9e9e9;
   color: #101010;
-  padding: 40px;
+  padding: 40px 40px;
   text-align: center;
 `;
 
 const Footer = () => {
   return (
     <FooterContainer>
-        <SubmitButton />
+        <SubmitButton buttonText={'Regenerate Questions'} />
+        <SubmitButton buttonText={'Send Quiz'} />
     </FooterContainer>
   );
 };
