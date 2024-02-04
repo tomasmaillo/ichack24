@@ -17,7 +17,7 @@ ReactDOM.render(
       justifyContent: 'center',
       backgroundColor: '#F4F4F4',
     }}>
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={'/ichack24'}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/student" element={<Student />} />
