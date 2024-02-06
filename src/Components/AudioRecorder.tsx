@@ -47,7 +47,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = () => {
     setIsRecording(false)
     setLoading(true)
     let response = await fetch(
-      'https://f3fc-2a0c-5bc0-40-3e3c-70c2-eb9e-ee77-1f6.ngrok-free.app/generate_quiz/',
+      'https://2d24-192-41-125-253.ngrok-free.app/generate_quiz/',
       {
         method: 'POST',
         headers: {
@@ -109,7 +109,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = () => {
 
     try {
       const response = await fetch(
-        'https://f3fc-2a0c-5bc0-40-3e3c-70c2-eb9e-ee77-1f6.ngrok-free.app/audio_to_text/',
+        'https://2d24-192-41-125-253.ngrok-free.app/audio_to_text/',
         {
           method: 'POST',
           body: formData,

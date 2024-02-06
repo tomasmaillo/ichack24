@@ -20,7 +20,7 @@ const Student = () => {
     // Using axios to make a GET request with custom header
     axios
       .get(
-        'https://f3fc-2a0c-5bc0-40-3e3c-70c2-eb9e-ee77-1f6.ngrok-free.app/get_quiz',
+        'https://2d24-192-41-125-253.ngrok-free.app/get_quiz',
         {
           headers: {
             'ngrok-skip-browser-warning': '69420', // Custom header to bypass the ngrok warning
@@ -41,7 +41,7 @@ const Student = () => {
     if (selectedAnswers.length === quiz.length) {
       axios
         .post(
-          'https://f3fc-2a0c-5bc0-40-3e3c-70c2-eb9e-ee77-1f6.ngrok-free.app/student_response',
+          'https://2d24-192-41-125-253.ngrok-free.app/student_response',
           {
             selectedAnswers,
           }
