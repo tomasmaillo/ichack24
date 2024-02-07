@@ -68,7 +68,7 @@ const Teacher = () => {
     // Using axios to make a GET request with custom header
     axios
       .post(
-        'https://a00b-94-175-61-189.ngrok-free.app/aggregate_quiz_results/',
+        'https://4ff9-94-175-61-189.ngrok-free.app/aggregate_quiz_results/',
         {
           headers: {
             'ngrok-skip-browser-warning': '69420', // Custom header to bypass the ngrok warning

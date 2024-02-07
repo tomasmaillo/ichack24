@@ -23,7 +23,7 @@ const Review = () => {
     // Using axios to make a GET request with custom header
     axios
       .get(
-        'https://a00b-94-175-61-189.ngrok-free.app/get_quiz',
+        'https://4ff9-94-175-61-189.ngrok-free.app/get_quiz',
         {
           headers: {
             'ngrok-skip-browser-warning': '69420', // Custom header to bypass the ngrok warning
