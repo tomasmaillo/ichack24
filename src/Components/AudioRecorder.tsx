@@ -47,7 +47,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = () => {
     setIsRecording(false)
     setLoading(true)
     let response = await fetch(
-      'https://a00b-94-175-61-189.ngrok-free.app/generate_quiz/',
+      'https://a00b-94-175-61-189.ngrok-free.app/generate_quiz_2/',
       {
         method: 'POST',
         headers: {
