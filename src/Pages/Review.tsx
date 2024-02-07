@@ -33,7 +33,7 @@ const Review = () => {
       .then((response) => {
         console.log(response)
 
-        setQuiz(response.data.questions)
+        setQuiz(response.data)
         return null
       })
       .catch((error) => {
